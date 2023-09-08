@@ -1,3 +1,10 @@
+
+
+
+https://github.com/rphlmr/nextjs-client-hints/assets/20722140/d873666a-ff41-4bca-bbbe-999ec505c4fd
+
+
+
 This is a [Next.js](https://nextjs.org/) demo handling client hints and user preferences without any hydration error.
 
 It is largely based on the Remix Run stack [The Epic Stack](https://github.com/epicweb-dev/epic-stack) from <a href="https://kentcdodds.com">Kent C. Dodds</a> and
