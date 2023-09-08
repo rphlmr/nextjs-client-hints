@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { ClientComponent } from "./demo/client-component";
 import { ServerComponent } from "./demo/server-component";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 export default function Home() {
 	const serverDate = new Date().toISOString();
@@ -12,6 +14,14 @@ export default function Home() {
 			</div>
 			<ServerComponent serverDate={serverDate} />
 			<ClientComponent serverDate={serverDate} />
+
+			<Link
+				href="https://github.com/rphlmr/nextjs-client-hints"
+				className="inline-flex items-center space-x-1"
+			>
+				<GitHubLogoIcon className="inline-block w-4 h-4 mr-1" />
+				<span>@rphlmr</span>
+			</Link>
 		</>
 	);
 }
