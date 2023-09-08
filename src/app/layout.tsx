@@ -38,7 +38,7 @@ export default function RootLayout({
 				className={cn(
 					inter.className,
 					theme,
-					"grid items-center justify-center gap-y-6",
+					"grid items-center justify-center gap-y-6 md:px-0 px-2",
 				)}
 			>
 				<ClientHintsProvider clientHints={clientHints}>

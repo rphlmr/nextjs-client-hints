@@ -7,7 +7,7 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
+} from "@/components/select";
 import { setTheme } from "./action";
 import { type getUserPrefs } from "./get-user-prefs";
 import { MoonIcon, SunIcon, DesktopIcon } from "@radix-ui/react-icons";
