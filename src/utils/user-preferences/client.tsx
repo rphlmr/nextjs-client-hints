@@ -1,38 +1,48 @@
 "use client";
 
-import React from "react";
-import { type getClientHints } from "./get-client-hints";
-import { clientHints } from "./config";
+import React, { useTransition } from "react";
+import { DesktopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
+import { type getUserPreferences } from "./server";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/select";
+import { cn } from "@/utils/cn";
+import { setTheme } from "./action";
+import { clientHints } from "./cookies";
 
 /* -------------------------------------------------------------------------- */
 /*                                  Context;                                  */
 /* -------------------------------------------------------------------------- */
 
-type ClientHintsContext = ReturnType<typeof getClientHints>;
+type UserPreferencesContext = ReturnType<typeof getUserPreferences>;
 
-type ClientHintProviderProps = {
-	clientHints: ClientHintsContext;
+type UserPreferencesProviderProps = {
+	userPreferences: UserPreferencesContext;
 	children: React.ReactNode;
 };
 
-const Context = React.createContext<ClientHintsContext | null>(null);
+const Context = React.createContext<UserPreferencesContext | null>(null);
 
-export const ClientHintsProvider = ({
-	clientHints,
+export const UserPreferencesProvider = ({
+	userPreferences,
 	children,
-}: ClientHintProviderProps) => {
-	const value = React.useMemo(() => clientHints, [clientHints]);
+}: UserPreferencesProviderProps) => {
+	const value = React.useMemo(() => userPreferences, [userPreferences]);
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
-export const useClientHints = () => {
+export const useUserPreferences = () => {
 	const context = React.useContext(Context);
 
 	if (!context) {
 		throw new Error(
-			`useClientHints must be used within a ClientHintProvider.`,
+			`useUserPreferences must be used within UserPreferencesProvider.`,
 		);
 	}
 	return context;
@@ -98,5 +108,42 @@ if (cookieChanged && navigator.cookieEnabled) {
 			`,
 			}}
 		/>
+	);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               Theme Selector                               */
+/* -------------------------------------------------------------------------- */
+
+export function ThemeSelector() {
+	const { theme } = useUserPreferences();
+	const [isPending, startTransition] = useTransition();
+
+	return (
+		<Select
+			name="theme"
+			defaultValue={theme || "system"}
+			onValueChange={(value) => {
+				startTransition(async () => {
+					await setTheme(value);
+				});
+			}}
+			dir="rtl"
+		>
+			<SelectTrigger className={cn("w-10", isPending && "animate-pulse")}>
+				<SelectValue placeholder="Theme" />
+			</SelectTrigger>
+			<SelectContent>
+				<SelectItem value="light" className="inline-flex">
+					<SunIcon className="h-4 w-4" />
+				</SelectItem>
+				<SelectItem value="dark">
+					<MoonIcon className="h-4 w-4" />
+				</SelectItem>
+				<SelectItem value="system">
+					<DesktopIcon className="h-4 w-4" />
+				</SelectItem>
+			</SelectContent>
+		</Select>
 	);
 }

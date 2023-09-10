@@ -1,4 +1,4 @@
-import { getClientHints } from "@/utils/client-hints/get-client-hints";
+import { getUserPreferences } from "@/utils/user-preferences/server";
 import {
 	Card,
 	CardContent,
@@ -7,36 +7,32 @@ import {
 	CardItem,
 	CardTitle,
 } from "@/components/card";
-import { getUserPrefs } from "@/utils/user-preferences/get-user-prefs";
 
 export function ServerComponent({ serverDate }: { serverDate: string }) {
-	const clientHints = getClientHints();
-	const userPrefs = getUserPrefs();
+	const { locale, prefersColorScheme, theme, timeZone } =
+		getUserPreferences();
 
 	return (
 		<Card>
 			<CardHeader>
 				<CardTitle>👋 I am a 🌍 server component</CardTitle>
 				<CardDescription>
-					I use the <code>getClientHints</code> and{" "}
-					<code>getUserPrefs</code> functions.
+					I use the <code>getUserPreferences</code> function.
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<CardItem title="Prefers color scheme">
-					{clientHints.prefersColorScheme}
+					{prefersColorScheme}
 				</CardItem>
-				<CardItem title="Theme">
-					{userPrefs.theme || "default"}
-				</CardItem>
-				<CardItem title="Locale">{clientHints.locale}</CardItem>
-				<CardItem title="Timezone">{clientHints.timeZone}</CardItem>
+				<CardItem title="Theme">{theme || "default"}</CardItem>
+				<CardItem title="Locale">{locale}</CardItem>
+				<CardItem title="Timezone">{timeZone}</CardItem>
 				<CardItem title="Today is">
 					<time dateTime={serverDate}>
-						{Intl.DateTimeFormat(clientHints.locale, {
+						{Intl.DateTimeFormat(locale, {
 							dateStyle: "full",
 							timeStyle: "long",
-							timeZone: clientHints.timeZone,
+							timeZone: timeZone,
 						})
 							.format(new Date(serverDate))
 							// hack to replace non-breaking space with regular space. Prevent hydration mismatch on invisible character...

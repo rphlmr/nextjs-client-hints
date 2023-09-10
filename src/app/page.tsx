@@ -1,7 +1,7 @@
 import Link from "next/link";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { ClientComponent } from "./demo/client-component";
 import { ServerComponent } from "./demo/server-component";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 export default function Home() {
 	const serverDate = new Date().toISOString();

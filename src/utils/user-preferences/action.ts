@@ -1,10 +1,10 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { userPrefs } from "./config";
+import { userPreferences } from "./cookies";
 
 export async function setTheme(theme: string) {
-	const { cookieName } = userPrefs.theme;
+	const { cookieName } = userPreferences.theme;
 
 	if (theme !== "light" && theme !== "dark" && theme !== "system") {
 		throw new Error("Invalid theme");

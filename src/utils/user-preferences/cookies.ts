@@ -22,4 +22,18 @@ export const clientHints = {
 	// add other hints here
 };
 
-export type ClientHintNames = keyof typeof clientHints;
+const preferences = {
+	theme: {
+		cookieName: "up-theme",
+		maxAge: 60 * 60 * 24 * 365, // 1 year
+		fallback: "" as Theme | "",
+	},
+	// add other user preferences here
+};
+
+export const userPreferences = {
+	...clientHints,
+	...preferences,
+};
+
+export type UserPreferencesName = keyof typeof userPreferences;
