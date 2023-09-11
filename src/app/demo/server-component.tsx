@@ -1,4 +1,4 @@
-import { getUserPreferences } from "@/utils/user-preferences/server";
+import { getUserPreferences } from "@/features/user-preferences/server";
 import {
 	Card,
 	CardContent,

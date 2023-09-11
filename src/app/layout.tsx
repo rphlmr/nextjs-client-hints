@@ -1,4 +1,4 @@
-import { getUserPreferences } from "@/utils/user-preferences/server";
+import { getUserPreferences } from "@/features/user-preferences/server";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -6,7 +6,7 @@ import {
 	ClientHintsCheck,
 	ThemeSelector,
 	UserPreferencesProvider,
-} from "@/utils/user-preferences/client";
+} from "@/features/user-preferences/client";
 import { cn } from "@/utils/cn";
 
 const inter = Inter({ subsets: ["latin"] });

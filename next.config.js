@@ -4,6 +4,7 @@ const nextConfig = {
 		serverActions: true,
 	},
 	output: "standalone",
+	poweredByHeader: false,
 };
 
 module.exports = nextConfig;

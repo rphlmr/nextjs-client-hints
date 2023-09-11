@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserPreferences } from "@/utils/user-preferences/client";
+import { useUserPreferences } from "@/features/user-preferences/client";
 import {
 	Card,
 	CardContent,
